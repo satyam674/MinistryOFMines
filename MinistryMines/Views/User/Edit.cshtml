@@ -1,0 +1,151 @@
+﻿@model MinistryMines.Models.User_Detail
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>User_Detail</h4>
+<hr/>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+
+            <div id="div2">
+
+                <div class="form-group">
+                    <label asp-for="title" class="control-label"></label>
+                    <select class="form-control" asp-for="title" id="txttitle">
+                        <option>--select title</option>
+                    </select>
+                    <span asp-validation-for="title" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label asp-for="name" class="control-label"></label>
+                    <input asp-for="name" class="form-control" />
+                    <span asp-validation-for="name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="gender" class="control-label">Gender</label>
+                    <div class="col-md-10">
+                        Male
+                        @Html.RadioButtonFor(model => model.gender, "Male")
+                        Female
+                        @Html.RadioButtonFor(model => model.gender, "Female")
+                    </div>
+                    <span asp-validation-for="gender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="email" class="control-label"></label>
+                    <input type="text" asp-for="email" id="txtEmail" />
+                    <span id="lblError" style="color:red"></span>
+                    <br />
+                    <br />
+                    @*<input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>*@
+                </div>
+
+                @*<div class="form-group">
+            <label asp-for="dob" class="control-label"></label>
+            <input asp-for="dob" class="form-control" />
+            <span asp-validation-for="dob" class="text-danger"></span>
+            <label class="text-danger">@TempData["dateinvalid"]</label>
+            </div>*@
+
+                <div class="form-group">
+                    <label asp-for="dob" class="control-label"></label>
+                    <div class='input-group date' id='datepicker'>
+                        <input asp-for="dob" type="text" id='datepicker' class="form-control" value="@DateTime.Now.ToString("yyyy-MM-ddThh:mm")" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                    <span asp-validation-for="dob" class="text-danger"></span>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label asp-for="state_1" class="control-label"></label>
+                    @*<select asp-for="state_1" class="form-control" asp-items="@(new SelectList(@ViewBag.Listoftitle, "state_1","St_Name"))"></select>*@
+                    <select class="form-control" asp-for="state_1" id="txtstate_1">
+                        <option>--select State--</option>
+                    </select>
+                    <span asp-validation-for="state_1" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div id="dvMap">
+                <div class="form-group">
+                    <label asp-for="district_1" class="control-label"></label>
+                    <select class="form-control" asp-for="district_1" id="txtdistrict_1">
+                        <option>--select District--</option>
+                    </select>
+                    <span asp-validation-for="district_1" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="address_1" class="control-label"></label>
+                    @*<input asp-for="address_1" id="txtaddress1" class="form-control" />
+                <span asp-validation-for="address_1" class="text-danger"></span>*@
+
+                    <input type="text" asp-for="address_1" id="txtaddress1" />
+                    <span id="lbladd1Error" style="color:red"></span>
+                    <br />
+                    <br />
+                </div>
+
+                <label>Is Same</label><input id="sameadd" name="add" type="checkbox" />
+                <div class="form-group">
+                    <label asp-for="state_2" class="control-label"></label>
+                    <select class="form-control" asp-for="state_2" id="txtstate_2">
+                        <option>--select State--</option>
+                    </select>
+                    <span asp-validation-for="state_2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="district_2" class="control-label"></label>
+                    <select class="form-control" asp-for="district_2" id="txtdistrict_2">
+                        <option>--select District--</option>
+                    </select>
+                    <span asp-validation-for="district_2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="address_2" class="control-label"></label>
+                    <input asp-for="address_2" id="txtaddress2" class="form-control" />
+                    <span asp-validation-for="address_2" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="image" class="control-label"></label>
+                    <input type="file" asp-for="image" class="form-control" />
+                    <span asp-validation-for="image" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" id="btnValidate" onclick="ValidateEmail()" />
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
